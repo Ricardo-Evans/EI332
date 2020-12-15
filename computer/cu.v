@@ -1,0 +1,54 @@
+module cu(op, func, branch_condition, r_type, i_type, j_type, write_data, write_register, read_data, alu_operation, shift, alu_immediate, pc_source, jal, sign_extern);
+   input [5:0] op,func;
+   input branch_condition;
+   output r_type, i_type, j_type, write_register, jal, read_data, shift, alu_immediate, sign_extern, write_data;
+   output[3:0] alu_operation;
+   output[1:0] pc_source;
+   assign r_type = ~|op;
+   wire i_add = r_type & func[5] & ~func[4] & ~func[3] & ~func[2] & ~func[1] & ~func[0];
+   wire i_sub = r_type & func[5] & ~func[4] & ~func[3] & ~func[2] &  func[1] & ~func[0];
+   
+   wire i_and = r_type & func[5] & ~func[4] & ~func[3] & func[2] & ~func[1] & ~func[0];
+   wire i_or  = r_type & func[5] & ~func[4] & ~func[3] & func[2] & ~func[1] & func[0];
+
+   wire i_xor = r_type & func[5] & ~func[4] & ~func[3] & func[2] & func[1] & ~func[0]; 
+   wire i_sll = r_type & ~func[5] & ~func[4] & ~func[3] & ~func[2] & ~func[1] & ~func[0]; 
+   wire i_srl = r_type & ~func[5] & ~func[4] & ~func[3] & ~func[2] & func[1] & ~func[0];
+   wire i_sra = r_type & ~func[5] & ~func[4] & ~func[3] & ~func[2] & func[1] & func[0];
+   wire i_jr  = r_type & ~func[5] & ~func[4] & func[3] & ~func[2] & ~func[1] & ~func[0];
+                
+   wire i_addi = ~op[5] & ~op[4] &  op[3] & ~op[2] & ~op[1] & ~op[0];
+   wire i_andi = ~op[5] & ~op[4] &  op[3] &  op[2] & ~op[1] & ~op[0];
+   
+   wire i_ori  = ~op[5] & ~op[4] &  op[3] &  op[2] & ~op[1] & op[0];
+   wire i_xori = ~op[5] & ~op[4] &  op[3] &  op[2] & op[1]  & ~op[0];  
+   wire i_lw = op[5]  & ~op[4] & ~op[3] & ~op[2] & op[1]  & op[0];  
+   wire i_sw = op[5]  & ~op[4] &  op[3] & ~op[2] & op[1]  & op[0];
+   wire i_beq  = ~op[5] & ~op[4] & ~op[3] &  op[2] & ~op[1] & ~op[0];
+   wire i_bne  = ~op[5] & ~op[4] & ~op[3] &  op[2] & ~op[1] & op[0];
+   wire i_lui  = ~op[5] & ~op[4] &  op[3] &  op[2] &  op[1] & op[0];
+   wire i_j  = ~op[5] & ~op[4] & ~op[3] & ~op[2] &  op[1] & ~op[0];
+   wire i_jal  = ~op[5] & ~op[4] & ~op[3] & ~op[2] &  op[1] & op[0];
+	
+	wire i_cont = ~op[5] & ~op[4] &  op[3] & ~op[2] & ~op[1] & op[0];
+   
+   assign pc_source[1] = i_jr | i_j | i_jal;
+   assign pc_source[0] = ( i_beq & branch_condition ) | (i_bne & ~branch_condition) | i_jr;
+   
+   assign write_register = i_add | i_sub | i_and | i_or  | i_xor | i_sll | i_srl | i_sra | i_addi | i_andi | i_ori | i_xori | i_lw | i_lui  | i_jal | i_cont;
+   
+   assign alu_operation[3] = i_sra | i_cont;
+   assign alu_operation[2] = i_sub | i_or | i_lui | i_srl | i_sra;
+   assign alu_operation[1] = i_xor | i_lui | i_sll | i_srl | i_sra | i_cont;
+   assign alu_operation[0] = i_and | i_or | i_sll | i_srl | i_sra | i_cont;
+   assign shift   = i_sll | i_srl | i_sra ;
+
+   assign alu_immediate  = i_addi | i_ori | i_xori | i_lw | i_lui | i_sw;
+   assign sign_extern = i_addi | i_lw | i_sw | i_beq | i_bne;
+   assign write_data = i_sw;
+   assign read_data = i_lw;
+   assign i_type = i_addi | i_andi | i_ori | i_xori | i_lw | i_lui | i_cont;
+	assign j_type = i_j | i_jal;
+   assign jal = i_jal;
+
+endmodule

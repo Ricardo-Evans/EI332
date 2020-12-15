@@ -1,0 +1,5 @@
+module computer(clock, reset);
+	input clock, reset;
+	
+	cpu cpu_instance(clock, reset);
+endmodule 

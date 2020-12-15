@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="computer">
+		<CBX_INST_ENTRY INSTANCE_NAME="|computer|cpu:cpu_instance|IF:if_stage|instruction_memory:instruction_memory_instance|rom:rom_instance|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_lva1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|computer|cpu:cpu_instance|MEM:mem_stage|data_memory:data_memory_instance|ram:ram_instance|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_oee1.tdf"/>
+	</PROJECT>
+</LOG_ROOT>

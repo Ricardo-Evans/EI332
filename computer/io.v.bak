@@ -1,0 +1,12 @@
+module io(memory_clock, address, input_data, output_data, write_enabled);
+	input memory_clock, write_enabled;
+	input[31:0] address, input_data;
+	output[31:0] output_data;
+	reg[31:0] output_data;
+	always @ (posedge memory_clock)
+	begin
+		case(address)
+			default: output_data <= 0;
+		endcase
+	end
+endmodule 

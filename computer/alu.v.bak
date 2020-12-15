@@ -1,0 +1,25 @@
+module alu(operation, parameter1, parameter2, result, zero);
+	input[3:0] operation;
+	input[31:0] parameter1, parameter2;
+	output[31:0] result;
+	reg[31:0] result;
+	output zero;
+	
+	assign zero = (result == 0);
+	
+	always @ (operation or parameter1 or parameter2)
+	begin
+		casex (operation)
+			4'bx000: result = parameter1 + parameter2;                           //x000 ADD
+			4'bx100: result = parameter1 - parameter2;                            //x100 SUB
+			4'bx001: result = parameter1 & parameter2;                          //x001 AND
+			4'bx101: result = parameter1 | parameter2;                            //x101 OR
+			4'bx010: result = parameter1 ^ parameter2;                           //x010 XOR
+			4'bx110: result = parameter2 << 16;                                         //x110 LUI: imm << 16bit
+			4'b0011: result = $unsigned(parameter2) << parameter1;  //0011 SLL: rd <- (rt << sa)
+			4'b0111: result = $unsigned(parameter2) >> parameter1;  //0111 SRL: rd <- (rt >> sa) (logical)
+			4'b1111: result = $signed(parameter2) >>> parameter1;    //1111 SRA: rd <- (rt >> sa) (arithmetic)
+			default: result = 0;
+		endcase
+	end
+endmodule 

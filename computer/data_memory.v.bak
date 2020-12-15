@@ -1,0 +1,12 @@
+module data_memory(memory_clock, address, input_data, output_data, write_enabled);
+	input memory_clock, write_enabled;
+	input[31:0] address, input_data;
+	output[31:0] output_data;
+	
+	wire[31:0] ram_output, io_output;
+	
+	io io_instance(memory_clock, address, input_data, io_output, write_enabled);
+	ram ram_instance(memory_clock, address[6:2], input_data, ram_output, write_enabled);
+	
+	selector_2x32 selector_instance(address[7], io_output, ram_output, output_data);
+endmodule 

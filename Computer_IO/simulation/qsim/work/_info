@@ -1,0 +1,81 @@
+m255
+K3
+13
+cModel Technology
+Z0 dE:\Project\Verilog\Computer_IO\simulation\qsim
+vsc_computer
+Z1 !s100 _DBczScc]bQQ`OzegcNYF2
+Z2 Im;KF0@4_Z<z=eD]^h_hXC2
+Z3 VLEiog9]Si5Cb?SZIlT?>G2
+Z4 dE:\Project\Verilog\Computer_IO\simulation\qsim
+Z5 w1591149190
+Z6 8sc_computer.vo
+Z7 Fsc_computer.vo
+L0 31
+Z8 OV;L;10.1d;51
+r1
+31
+Z9 !s90 -work|work|sc_computer.vo|
+Z10 o-work work -O0
+!i10b 1
+!s85 0
+Z11 !s108 1591149190.646000
+Z12 !s107 sc_computer.vo|
+!s101 -O0
+vsc_computer_vlg_check_tst
+!i10b 1
+Z13 !s100 GQWm9B?e?Ukhief@016TQ1
+Z14 IfC<^Qck?GZj?:nPA5;OHW0
+Z15 VoN;VQ7]9o6Ia`YV><Dk4i3
+R4
+Z16 w1591149188
+Z17 8sc_computer.vt
+Z18 Fsc_computer.vt
+L0 61
+R8
+r1
+!s85 0
+31
+Z19 !s108 1591149191.100000
+Z20 !s107 sc_computer.vt|
+Z21 !s90 -work|work|sc_computer.vt|
+!s101 -O0
+R10
+vsc_computer_vlg_sample_tst
+!i10b 1
+Z22 !s100 ;=U@BcK^:cZ>4d=jc]RUO3
+Z23 IRSj563=7Y[jRZcWajd0lf1
+Z24 VQJ[EPgH;XE2E[`>CMC7On3
+R4
+R16
+R17
+R18
+L0 29
+R8
+r1
+!s85 0
+31
+R19
+R20
+R21
+!s101 -O0
+R10
+vsc_computer_vlg_vec_tst
+!i10b 1
+Z25 !s100 ]?7kjCAj5d1ofS@GAE4Yf2
+Z26 IERcM;U?jZO:EjVX^LzP3k0
+Z27 VmDHkRgb0GW[o2oea?bDTi1
+R4
+R16
+R17
+R18
+Z28 L0 4298
+R8
+r1
+!s85 0
+31
+R19
+R20
+R21
+!s101 -O0
+R10

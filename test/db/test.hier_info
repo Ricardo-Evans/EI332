@@ -1,0 +1,8 @@
+|test
+clock => register2~reg0.CLK
+clock => register1~reg0.CLK
+line <= register1~reg0.DB_MAX_OUTPUT_PORT_TYPE
+register1 <= register1~reg0.DB_MAX_OUTPUT_PORT_TYPE
+register2 <= register2~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+

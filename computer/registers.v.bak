@@ -1,0 +1,24 @@
+module registers(clock, reset, read_number1, read_number2, write_number, input_data, output_data1, output_data2, write_enabled);
+	input clock, reset, write_enabled;
+	input[4:0] read_number1, read_number2, write_number;
+	input[31:0] input_data;
+	output[31:0] output_data1, output_data2;
+	
+	reg[31:0] register [1:31];
+	
+	assign output_data1 = (read_number1 == 0) ? 0 : register[read_number1];
+	assign output_data2 = (read_number2 == 0) ? 0 : register[read_number2];
+	
+	always @(negedge clock or posedge reset)
+	begin
+		if (reset == 1)
+		begin
+			integer i;
+			for (i = 1;i < 32;i = i + 1)	 register[i] <= 0;
+		end
+		else
+		begin
+			if ((write_enabled == 1) && (write_number != 0)) register[write_number] <= input_data;
+		end
+	end
+endmodule 

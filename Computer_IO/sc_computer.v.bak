@@ -1,0 +1,54 @@
+/////////////////////////////////////////////////////////////
+//                                                         //
+// School of Software of SJTU                              //
+//                                                         //
+/////////////////////////////////////////////////////////////
+
+module sc_computer (reset,clk,clock,pc,inst,aluout,memout,imem_clk,dmem_clk,HEX0, HEX1, HEX2,SW0,SW1,SW2,SW3,SW4,SW5,SW6,SW7,SW8,SW9,mem_dataout,io_read_data);
+   
+	input SW0,SW1,SW2,SW3,SW4,SW5,SW6,SW7,SW8,SW9;
+   input reset,clk;
+	wire [31:0] in_port0,in_port1;
+	
+	output clock;
+	
+	assign in_port0[0]=SW0;
+	assign in_port0[1]=SW1;
+	assign in_port0[2]=SW2;
+	assign in_port0[3]=SW3;
+	assign in_port0[4]=SW4;
+	assign in_port1[0]=SW5;
+	assign in_port1[1]=SW6;
+	assign in_port1[2]=SW7;
+	assign in_port1[3]=SW8;
+	assign in_port1[4]=SW9;
+	
+	reg clock;
+	
+	initial
+	begin
+		clock = 0;
+	end
+	always @(posedge clk)
+	begin
+		if(~reset)
+			clock <= 0;
+		clock <= ~clock;
+	end
+	
+   output [31:0] pc,inst,aluout,memout;
+   output        imem_clk,dmem_clk;
+   wire   [31:0] data;
+   wire          wmem; // all these "wire"s are used to connect or interface the cpu,dmem,imem and so on.
+	output [6:0] HEX0,HEX1,HEX2;
+	output [31:0] mem_dataout;
+	output [31:0] io_read_data;
+   
+   sc_cpu cpu (clock,reset,inst,memout,pc,wmem,aluout,data);          // CPU module.
+   sc_instmem  imem (pc,inst,clock,clk,imem_clk);                  // instruction memory.
+   sc_datamem  dmem (aluout,data,memout,wmem,clock,clk,dmem_clk,HEX0,HEX1,HEX2,in_port0,in_port1,mem_dataout,io_read_data); // data memory.
+
+endmodule
+
+
+

@@ -1,0 +1,13 @@
+vendor_name = ModelSim
+source_file = 1, E:/Project/Verilog/test/test.v
+source_file = 1, E:/Project/Verilog/test/test.vwf
+source_file = 1, E:/Project/Verilog/test/db/test.cbx.xml
+design_name = test
+instance = comp, \clock~I , clock, test, 1
+instance = comp, \register1~0 , register1~0, test, 1
+instance = comp, \register1~reg0 , register1~reg0, test, 1
+instance = comp, \register2~0 , register2~0, test, 1
+instance = comp, \register2~reg0 , register2~reg0, test, 1
+instance = comp, \line~I , line, test, 1
+instance = comp, \register1~I , register1, test, 1
+instance = comp, \register2~I , register2, test, 1
